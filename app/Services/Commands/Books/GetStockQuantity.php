@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Commands;
+namespace App\Services\Commands\Books;
 
 use App\Models\Book;
 

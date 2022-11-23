@@ -25,8 +25,11 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('books', BookController::class);
     Route::apiResource('reservations', ReservationController::class);
 
-   // Route::post('reservations/takeBook', [ReservationController::class, 'takeBook']);
-    Route::patch('reservations/{reservation}/extend', [ReservationController::class, 'extendBook']);
-    Route::patch('reservations/{reservation}/return', [ReservationController::class, 'returnBook']);
+    Route::get('books/{book}/take', [BookController::class, 'takeBook']);
+    Route::post('books/bulk', [BookController::class, 'bulkStore']);
+
+
+    Route::get('reservations/{reservation}/extend', [ReservationController::class, 'extendBook']);
+    Route::get('reservations/{reservation}/return', [ReservationController::class, 'returnBook']);
     //Route::post('invoices/bulk', [InvoiceController::class, 'bulkStore']);
 });

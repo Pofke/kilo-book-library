@@ -9,16 +9,13 @@ class Authentication
 {
     public function isUserUnauthorized($reservation): bool
     {
-        $user = Auth::user();
-        return ($user->tokenCan('getSelf') && $user->id != $reservation->user_id);
+        $user = Auth::id();
+        return ($user->tokenCan('getSelf') && $user != $reservation->user_id);
     }
 
-    public function addExtraFilterToReader()
+    public function addExtraFilterToReader($userId)
     {
-        $user = Auth::user();
-        if ($user->tokenCan('getSelf')) {
-            return ["user_id", '=', $user->id];
-        }
+        return ["user_id", '=', $userId];
     }
 
     public function generateUnauthorisedMessage(): JsonResponse
