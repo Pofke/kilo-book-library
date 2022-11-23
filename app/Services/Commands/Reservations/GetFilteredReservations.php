@@ -14,9 +14,9 @@ class GetFilteredReservations
     {
         $filter = new ReservationsFilter();
         $filterItems = $filter->transform($request);
-        $user = Auth::user();
-        if ($user->cannot('viewAny', Reservation::class)) {
-            $filterItems[] = (new AddExtraFilterForReader())->execute($user->id);
+        $user = Auth::id();
+        if (Auth::user()->cannot('viewAny', Reservation::class)) {
+            $filterItems[] = (new AddExtraFilterForReader())->execute($user);
         }
         return Reservation::where($filterItems);
     }
